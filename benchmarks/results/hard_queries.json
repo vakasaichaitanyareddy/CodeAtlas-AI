@@ -1,0 +1,147 @@
+[
+  {
+    "query_id": "q_arch_002",
+    "query": "multi tenant repository access control returning 403 forbidden",
+    "category": "architecture",
+    "difficulty": "medium",
+    "relevant_files": [
+      "apps/api/app/api/v1/repositories.py",
+      "apps/api/app/services/repository_service.py"
+    ],
+    "bm25_rank": 0,
+    "dense_rank": 0,
+    "hybrid_rank": 0,
+    "rerank_rank": 0,
+    "combined_mrr": 0.0
+  },
+  {
+    "query_id": "q_arch_007",
+    "query": "SSE streaming event loop emitting token deltas and complete status",
+    "category": "architecture",
+    "difficulty": "medium",
+    "relevant_files": [
+      "apps/api/app/services/chat_service.py",
+      "apps/api/app/api/v1/chat.py"
+    ],
+    "bm25_rank": 0,
+    "dense_rank": 0,
+    "hybrid_rank": 0,
+    "rerank_rank": 0,
+    "combined_mrr": 0.0
+  },
+  {
+    "query_id": "q_dep_007",
+    "query": "where are code symbol models and database relationships declared",
+    "category": "dependency",
+    "difficulty": "easy",
+    "relevant_files": [
+      "apps/api/app/models/code.py"
+    ],
+    "bm25_rank": 0,
+    "dense_rank": 0,
+    "hybrid_rank": 0,
+    "rerank_rank": 0,
+    "combined_mrr": 0.0
+  },
+  {
+    "query_id": "q_dep_008",
+    "query": "where is repository file scanning and git clone logic implemented",
+    "category": "dependency",
+    "difficulty": "easy",
+    "relevant_files": [
+      "workers/scanner.py"
+    ],
+    "bm25_rank": 0,
+    "dense_rank": 0,
+    "hybrid_rank": 0,
+    "rerank_rank": 0,
+    "combined_mrr": 0.0
+  },
+  {
+    "query_id": "q_impl_006",
+    "query": "how does query classifier detect factual code vs architecture intents",
+    "category": "implementation",
+    "difficulty": "medium",
+    "relevant_files": [
+      "packages/rag/classifier.py"
+    ],
+    "bm25_rank": 0,
+    "dense_rank": 0,
+    "hybrid_rank": 0,
+    "rerank_rank": 0,
+    "combined_mrr": 0.0
+  },
+  {
+    "query_id": "q_impl_008",
+    "query": "how does the SSE client disconnect handler perform database session rollback",
+    "category": "implementation",
+    "difficulty": "medium",
+    "relevant_files": [
+      "apps/api/app/api/v1/chat.py"
+    ],
+    "bm25_rank": 0,
+    "dense_rank": 0,
+    "hybrid_rank": 0,
+    "rerank_rank": 0,
+    "combined_mrr": 0.0
+  },
+  {
+    "query_id": "q_ambig_002",
+    "query": "index repository status and job tracking",
+    "category": "ambiguous",
+    "difficulty": "hard",
+    "relevant_files": [
+      "apps/api/app/api/v1/repositories.py",
+      "workers/tasks/ingestion.py"
+    ],
+    "bm25_rank": 0,
+    "dense_rank": 0,
+    "hybrid_rank": 0,
+    "rerank_rank": 0,
+    "combined_mrr": 0.0
+  },
+  {
+    "query_id": "q_ambig_003",
+    "query": "health check liveness and readiness probe",
+    "category": "ambiguous",
+    "difficulty": "hard",
+    "relevant_files": [
+      "apps/api/app/api/v1/health.py"
+    ],
+    "bm25_rank": 0,
+    "dense_rank": 0,
+    "hybrid_rank": 0,
+    "rerank_rank": 0,
+    "combined_mrr": 0.0
+  },
+  {
+    "query_id": "q_ambig_005",
+    "query": "chat session message conversation",
+    "category": "ambiguous",
+    "difficulty": "hard",
+    "relevant_files": [
+      "apps/api/app/api/v1/chat.py",
+      "apps/api/app/services/chat_service.py"
+    ],
+    "bm25_rank": 0,
+    "dense_rank": 0,
+    "hybrid_rank": 0,
+    "rerank_rank": 0,
+    "combined_mrr": 0.0
+  },
+  {
+    "query_id": "q_ambig_006",
+    "query": "graph nodes and edges serialization response",
+    "category": "ambiguous",
+    "difficulty": "hard",
+    "relevant_files": [
+      "apps/api/app/schemas/repository.py",
+      "apps/api/app/api/v1/repositories.py"
+    ],
+    "bm25_rank": 0,
+    "dense_rank": 0,
+    "hybrid_rank": 0,
+    "rerank_rank": 0,
+    "combined_mrr": 0.0
+  }
+]

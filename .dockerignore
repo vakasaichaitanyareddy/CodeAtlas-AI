@@ -1,0 +1,15 @@
+.venv
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.git
+.gitignore
+.env
+*.log
+tools/
+scratch/
+apps/web/node_modules
+apps/web/.next

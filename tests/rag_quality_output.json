@@ -1,0 +1,765 @@
+[
+  {
+    "query": "How does request context work in Flask?",
+    "intent": "GENERAL_QA",
+    "grounding_status": "VERIFIED",
+    "provider": "mock",
+    "is_mock": true,
+    "citations": [
+      {
+        "raw_citation": "[src/flask/app.py:L1504-L1518]",
+        "file_path": "src/flask/app.py",
+        "start_line": 1504,
+        "end_line": 1518,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "54486c85-baee-40eb-a7ee-f23bd4c6a34d",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/ctx.py:L209-L232]",
+        "file_path": "src/flask/ctx.py",
+        "start_line": 209,
+        "end_line": 232,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "ae0b7ce8-f5b1-4235-9c68-9905204739f2",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/ctx.py:L154-L206]",
+        "file_path": "src/flask/ctx.py",
+        "start_line": 154,
+        "end_line": 206,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "24388276-5111-4bca-9c64-7d865cac114d",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/app.py:L1520-L1567]",
+        "file_path": "src/flask/app.py",
+        "start_line": 1520,
+        "end_line": 1567,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "424aa9c7-6c94-4cdd-bebf-d13b2640cb5f",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/app.py:L1504-L1518]",
+        "file_path": "src/flask/app.py",
+        "start_line": 1504,
+        "end_line": 1518,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "54486c85-baee-40eb-a7ee-f23bd4c6a34d",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/ctx.py:L209-L232]",
+        "file_path": "src/flask/ctx.py",
+        "start_line": 209,
+        "end_line": 232,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "ae0b7ce8-f5b1-4235-9c68-9905204739f2",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      }
+    ],
+    "retrieved_chunks": [
+      {
+        "chunk_id": "54486c85-baee-40eb-a7ee-f23bd4c6a34d",
+        "file_path": "src/flask/app.py",
+        "symbol_name": "request_context",
+        "symbol_type": "METHOD",
+        "start_line": 1504,
+        "end_line": 1518,
+        "content": "# File: src/flask/app.py (Lines 1504-1518)\n# Class: Flask | Symbol: Flask.request_context\n# Imports: __future__, collections.abc, inspect, os, sys, typing, weakref, datetime\n\n    def request_context(self, environ: WSGIEnvironment) -> AppContext:\n        \"\"\"Create an :class:`.AppContext` with request information representing\n        the given WSGI environment. A context is automatically pushed when\n        handling each request. When the context is pushed, :data:`.request`,\n        :data:`.session`, :data:`g`, and :data:`.current_app` become available.\n\n        This method should not be used in your own code. Creating a valid WSGI\n        environ is not trivial. Use :meth:`test_request_context` to correctly\n        create a WSGI environ and request context instead.\n\n        See :doc:`/appcontext`.\n\n        :param environ: A WSGI environment.\n        \"\"\"\n        return AppContext.from_environ(self, environ)",
+        "score": 0.955,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "ae0b7ce8-f5b1-4235-9c68-9905204739f2",
+        "file_path": "src/flask/ctx.py",
+        "symbol_name": "has_request_context",
+        "symbol_type": "FUNCTION",
+        "start_line": 209,
+        "end_line": 232,
+        "content": "# File: src/flask/ctx.py (Lines 209-232)\n# Scope: Global | Symbol: has_request_context\n# Imports: __future__, contextvars, typing, functools, types, werkzeug.exceptions, werkzeug.routing, \n\ndef has_request_context() -> bool:\n    \"\"\"Test if an app context is active and if it has request information.\n\n    .. code-block:: python\n\n        from flask import has_request_context, request\n\n        if has_request_context():\n            remote_addr = request.remote_addr\n\n    If a request context is active, the :data:`.request` and :data:`.session`\n    context proxies will available and ``True``, otherwise ``False``. You can\n    use that to test the data you use, rather than using this function.\n\n    .. code-block:: python\n\n        from flask import request\n\n        if request:\n            remote_addr = request.remote_addr\n\n    .. versionadded:: 0.7\n    \"\"\"\n    return (ctx := _cv_app.get(None)) is not None and ctx.has_request",
+        "score": 0.9543,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "24388276-5111-4bca-9c64-7d865cac114d",
+        "file_path": "src/flask/ctx.py",
+        "symbol_name": "copy_current_request_context",
+        "symbol_type": "FUNCTION",
+        "start_line": 154,
+        "end_line": 206,
+        "content": "# File: src/flask/ctx.py (Lines 154-206)\n# Scope: Global | Symbol: copy_current_request_context\n# Imports: __future__, contextvars, typing, functools, types, werkzeug.exceptions, werkzeug.routing, \n\ndef copy_current_request_context(f: F) -> F:\n    \"\"\"Decorate a function to run inside the current request context. This can\n    be used when starting a background task, otherwise it will not see the app\n    and request objects that were active in the parent.\n\n    .. warning::\n\n        Due to the following caveats, it is often safer (and simpler) to pass\n        the data you need when starting the task, rather than using this and\n        relying on the context objects.\n\n    In order to avoid execution switching partially though reading data, either\n    read the request body (access ``form``, ``json``, ``data``, etc) before\n    starting the task, or use a lock. This can be an issue when using threading,\n    but shouldn't be an issue when using greenlet/gevent or asyncio.\n\n    If the task will access ``session``, be sure to do so in the parent as well\n    so that the ``Vary: cookie`` header will be set. Modifying ``session`` in\n    the task should be avoided, as it may execute after the response cookie has\n    already been written.\n\n    .. code-block:: python\n\n        import gevent\n        from flask import copy_current_request_context\n\n        @app.route('/')\n        def index():\n            @copy_current_request_context\n            def do_some_work():\n                # do some work here, it can access flask.request or\n                # flask.session like you would otherwise in the view function.\n                ...\n            gevent.spawn(do_some_work)\n            return 'Regular response'\n\n    .. versionadded:: 0.10\n    \"\"\"\n    # Store the context that was active when the decorator was applied.\n    original = _cv_app.get(None)\n\n    if original is None:\n        raise RuntimeError(\n            \"'copy_current_request_context' can only be used when a\"\n            \" request context is active, such as in a view function.\"\n        )\n\n    def wrapper(*args: t.Any, **kwargs: t.Any) -> t.Any:\n        # Copy the context before pushing, so each worker acts independently.\n        with original.copy() as ctx:\n            return ctx.app.ensure_sync(f)(*args, **kwargs)\n\n    return update_wrapper(wrapper, f)  # type: ignore[return-value]",
+        "score": 0.9537,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "424aa9c7-6c94-4cdd-bebf-d13b2640cb5f",
+        "file_path": "src/flask/app.py",
+        "symbol_name": "test_request_context",
+        "symbol_type": "METHOD",
+        "start_line": 1520,
+        "end_line": 1567,
+        "content": "# File: src/flask/app.py (Lines 1520-1567)\n# Class: Flask | Symbol: Flask.test_request_context\n# Imports: __future__, collections.abc, inspect, os, sys, typing, weakref, datetime\n\n    def test_request_context(self, *args: t.Any, **kwargs: t.Any) -> AppContext:\n        \"\"\"Create an :class:`.AppContext` with request information created from\n        the given arguments. When the context is pushed, :data:`.request`,\n        :data:`.session`, :data:`g`, and :data:`.current_app` become available.\n\n        This is useful during testing to run a function that uses request data\n        without dispatching a full request. Use this as a ``with`` block to push\n        a context.\n\n        .. code-block:: python\n\n            with app.test_request_context(...):\n                generate_report()\n\n        See :doc:`/appcontext`.\n\n        Takes the same arguments as Werkzeug's\n        :class:`~werkzeug.test.EnvironBuilder`, with some defaults from\n        the application. See the linked Werkzeug docs for most of the\n        available arguments. Flask-specific behavior is listed here.\n\n        :param path: URL path being requested.\n        :param base_url: Base URL where the app is being served, which\n            ``path`` is relative to. If not given, built from\n            :data:`PREFERRED_URL_SCHEME`, ``subdomain``, :data:`SERVER_NAME`,\n            and :data:`APPLICATION_ROOT`.\n        :param subdomain: Subdomain name to prepend to :data:`SERVER_NAME`.\n        :param url_scheme: Scheme to use instead of\n            :data:`PREFERRED_URL_SCHEME`.\n        :param data: The request body text or bytes,or a dict of form data.\n        :param json: If given, this is serialized as JSON and passed as\n            ``data``. Also defaults ``content_type`` to\n            ``application/json``.\n        :param args: Other positional arguments passed to\n            :class:`~werkzeug.test.EnvironBuilder`.\n        :param kwargs: Other keyword arguments passed to\n            :class:`~werkzeug.test.EnvironBuilder`.\n        \"\"\"\n        from .testing import EnvironBuilder\n\n        builder = EnvironBuilder(self, *args, **kwargs)\n\n        try:\n            environ = builder.get_environ()\n        finally:\n            builder.close()\n\n        return self.request_context(environ)",
+        "score": 0.9536,
+        "source": "hybrid"
+      }
+    ],
+    "retrieval_evidence": {
+      "candidate_count": 4,
+      "selected_count": 4,
+      "discarded_count": 0,
+      "bm25_scores": [
+        12.4608,
+        12.3944,
+        11.4742,
+        11.4477
+      ],
+      "vector_scores": [],
+      "rrf_scores": [
+        0.016129,
+        0.015873,
+        0.014706,
+        0.014493
+      ],
+      "reranker_scores": [
+        0.955,
+        0.9543,
+        0.9537,
+        0.9536
+      ],
+      "context_tokens": 1618,
+      "evidence_threshold_met": true,
+      "threshold_reason": "sufficient_evidence"
+    },
+    "answer": "> [!NOTE]\n> **Offline Baseline Mode (`mock-llm`)**: This response is deterministically synthesized from retrieved codebase evidence. To enable live neural multi-turn reasoning, configure `GEMINI_API_KEY` or `OPENAI_API_KEY` in `.env`.\n\n### Technical Analysis: How does request context work in Flask?\n\nBased on verified repository evidence, the implementation is structured as follows:\n\n1. **`request_context` (METHOD)** in [src/flask/app.py:L1504-L1518]:\n   - **Documentation**: Create an :class:`.AppContext` with request information representing the given WSGI environment. A context is automatically pushed when\n   - **Key Operations**: Exposes `request_context()`\n\n2. **`has_request_context` (FUNCTION)** in [src/flask/ctx.py:L209-L232]:\n   - **Documentation**: Test if an app context is active and if it has request information. .. code-block:: python\n   - **Key Operations**: Exposes `has_request_context()`\n\n3. **`copy_current_request_context` (FUNCTION)** in [src/flask/ctx.py:L154-L206]:\n   - **Documentation**: Decorate a function to run inside the current request context. This can be used when starting a background task, otherwise it will not see the app\n   - **Key Operations**: Exposes `copy_current_request_context()`, `index()`, `do_some_work()`, `wrapper()`\n\n4. **`test_request_context` (METHOD)** in [src/flask/app.py:L1520-L1567]:\n   - **Documentation**: Create an :class:`.AppContext` with request information created from the given arguments. When the context is pushed, :data:`.request`,\n   - **Key Operations**: Exposes `test_request_context()`\n\n### Key Takeaways\n- Core execution logic is anchored by [src/flask/app.py:L1504-L1518], resolving runtime dispatch and state tracking.\n- Supporting context and lifecycle management are coordinated via [src/flask/ctx.py:L209-L232].\n- All referenced line ranges have been verified against active AST declarations."
+  },
+  {
+    "query": "Where is the Flask application class implemented?",
+    "intent": "FACTUAL_CODE",
+    "grounding_status": "VERIFIED",
+    "provider": "mock",
+    "is_mock": true,
+    "citations": [
+      {
+        "raw_citation": "[src/flask/app.py:L110-L1628]",
+        "file_path": "src/flask/app.py",
+        "start_line": 110,
+        "end_line": 1628,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "655005e0-508a-47ff-9413-1361ed427f3e",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/json/provider.py:L89-L105]",
+        "file_path": "src/flask/json/provider.py",
+        "start_line": 89,
+        "end_line": 105,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "4a95b9de-3bcf-4f71-8a48-6af07de144e6",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/app.py:L110-L1628]",
+        "file_path": "src/flask/app.py",
+        "start_line": 110,
+        "end_line": 1628,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "655005e0-508a-47ff-9413-1361ed427f3e",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/json/provider.py:L89-L105]",
+        "file_path": "src/flask/json/provider.py",
+        "start_line": 89,
+        "end_line": 105,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "4a95b9de-3bcf-4f71-8a48-6af07de144e6",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      }
+    ],
+    "retrieved_chunks": [
+      {
+        "chunk_id": "655005e0-508a-47ff-9413-1361ed427f3e",
+        "file_path": "src/flask/app.py",
+        "symbol_name": "Flask",
+        "symbol_type": "CLASS",
+        "start_line": 110,
+        "end_line": 1628,
+        "content": "class Flask(App)\n\"\"\"The flask object implements a WSGI application and acts as the central\nobject.  It is passed the name of the module or package of the\napplication.  Once it is created it will act as a central registry for\nthe view functions, the URL rules, template configuration and much more.\n\nThe name of the package is used to resolve resources from inside the\npackage or the folder the module is contained in depending on if the\npackage parameter resolves to an actual python package (a folder with\nan :file:`__init__.py` file inside) or a standard module (just a ``.py`` file).\n\nFor more information about resource loading, see :func:`open_resource`.\n\nUsually you create a :class:`Flask` instance in your main module or\nin the :file:`__init__.py` file of your package like this::\n\n    from flask import Flask\n    app = Flask(__name__)\n\n.. admonition:: About the First Parameter\n\n    The idea of the first parameter is to give Flask an idea of what\n    belongs to your application.  This name is used to find resources\n    on the filesystem, can be used by extensions to improve debugging\n    information and a lot more.\n\n    So it's important what you provide there.  If you are using a single\n    module, `__name__` is always the correct value.  If you however are\n    using a package, it's usually recommended to hardcode the name of\n    your package there.\n\n    For example if your application is defined in :file:`yourapplication/app.py`\n    you should create it with one of the two versions below::\n\n        app = Flask('yourapplication')\n        app = Flask(__name__.split('.')[0])\n\n    Why is that?  The application will work even with `__name__`, thanks\n    to how resources are looked up.  However it will make debugging more\n    painful.  Certain extensions can make assumptions based on the\n    import name of your application.  For example the Flask-SQLAlchemy\n    extension will look for the code in your application that triggered\n    an SQL query in debug mode.  If the import name is not properly set\n    up, that debugging information is lost.  (For example it would only\n    pick up SQL queries in `yourapplication.app` and not\n    `yourapplication.views.frontend`)\n\n.. versionadded:: 0.7\n   The `static_url_path`, `static_folder`, and `template_folder`\n   parameters were added.\n\n.. versionadded:: 0.8\n   The `instance_path` and `instance_relative_config` parameters were\n   added.\n\n.. versionadded:: 0.11\n   The `root_path` parameter was added.\n\n.. versionadded:: 1.0\n   The ``host_matching`` and ``static_host`` parameters were added.\n\n.. versionadded:: 1.0\n   The ``subdomain_matching`` parameter was added. Subdomain\n   matching needs to be enabled manually now. Setting\n   :data:`SERVER_NAME` does not implicitly enable it.\n\n:param import_name: the name of the application package\n:param static_url_path: can be used to specify a different path for the\n                        static files on the web.  Defaults to the name\n                        of the `static_folder` folder.\n:param static_folder: The folder with static files that is served at\n    ``static_url_path``. Relative to the application ``root_path``\n    or an absolute path. Defaults to ``'static'``.\n:param static_host: the host to use when adding the static route.\n    Defaults to None. Required when using ``host_matching=True``\n    with a ``static_folder`` configured.\n:param host_matching: set ``url_map.host_matching`` attribute.\n    Defaults to False.\n:param subdomain_matching: consider the subdomain relative to\n    :data:`SERVER_NAME` when matching routes. Defaults to False.\n:param template_folder: the folder that contains the templates that should\n                        be used by the application.  Defaults to\n                        ``'templates'`` folder in the root path of the\n                        application.\n:param instance_path: An alternative instance path for the application.\n                      By default the folder ``'instance'`` next to the\n                      package or module is assumed to be the instance\n                      path.\n:param instance_relative_config: if set to ``True`` relative filenames\n                                 for loading the config are assumed to\n                                 be relative to the instance path instead\n                                 of the application root.\n:param root_path: The path to the root of the application files.\n    This should only be set manually when it can't be detected\n    automatically, such as for namespace packages.\"\"\"\n# Methods (35):\n  - def __init_subclass__(cls, **kwargs: t.Any) -> None\n  - def __init__(self, import_name: str, static_url_path: str | None=None, static_folder: str | os.PathLike[str] | None='static', static_host: str | None=None, host_matching: bool=False, subdomain_matching: bool=False, template_folder: str | os.PathLike[str] | None='templates', instance_path: str | None=None, instance_relative_config: bool=False, root_path: str | None=None)\n  - def get_send_file_max_age(self, filename: str | None) -> int | None\n  - def send_static_file(self, filename: str) -> Response\n  - def open_resource(self, resource: str, mode: str='rb', encoding: str | None=None) -> t.IO[t.AnyStr]\n  - def open_instance_resource(self, resource: str, mode: str='rb', encoding: str | None='utf-8') -> t.IO[t.AnyStr]\n  - def create_jinja_environment(self) -> Environment\n  - def create_url_adapter(self, request: Request | None) -> MapAdapter | None\n  - def raise_routing_exception(self, request: Request) -> t.NoReturn\n  - def update_template_context(self, ctx: AppContext, context: dict[str, t.Any]) -> None\n  - def make_shell_context(self) -> dict[str, t.Any]\n  - def run(self, host: str | None=None, port: int | None=None, debug: bool | None=None, load_dotenv: bool=True, **options: t.Any) -> None\n  - def test_client(self, use_cookies: bool=True, **kwargs: t.Any) -> FlaskClient\n  - def test_cli_runner(self, **kwargs: t.Any) -> FlaskCliRunner\n  - def handle_http_exception(self, ctx: AppContext, e: HTTPException) -> HTTPException | ft.ResponseReturnValue\n  - def handle_user_exception(self, ctx: AppContext, e: Exception) -> HTTPException | ft.ResponseReturnValue\n  - def handle_exception(self, ctx: AppContext, e: Exception) -> Response\n  - def log_exception(self, ctx: AppContext, exc_info: tuple[type, BaseException, TracebackType] | tuple[None, None, None]) -> None\n  - def dispatch_request(self, ctx: AppContext) -> ft.ResponseReturnValue\n  - def full_dispatch_request(self, ctx: AppContext) -> Response\n  - def finalize_request(self, ctx: AppContext, rv: ft.ResponseReturnValue | HTTPException, from_error_handler: bool=False) -> Response\n  - def make_default_options_response(self, ctx: AppContext) -> Response\n  - def ensure_sync(self, func: t.Callable[..., t.Any]) -> t.Callable[..., t.Any]\n  - def async_to_sync(self, func: t.Callable[..., t.Coroutine[t.Any, t.Any, t.Any]]) -> t.Callable[..., t.Any]\n  - def url_for(self, /, endpoint: str, *, _anchor: str | None=None, _method: str | None=None, _scheme: str | None=None, _external: bool | None=None, **values: t.Any) -> str\n  - def make_response(self, rv: ft.ResponseReturnValue) -> Response\n  - def preprocess_request(self, ctx: AppContext) -> ft.ResponseReturnValue | None\n  - def process_response(self, ctx: AppContext, response: Response) -> Response\n  - def do_teardown_request(self, ctx: AppContext, exc: BaseException | None=None) -> None\n  - def do_teardown_appcontext(self, ctx: AppContext, exc: BaseException | None=None) -> None\n  - def app_context(self) -> AppContext\n  - def request_context(self, environ: WSGIEnvironment) -> AppContext\n  - def test_request_context(self, *args: t.Any, **kwargs: t.Any) -> AppContext\n  - def wsgi_app(self, environ: WSGIEnvironment, start_response: StartResponse) -> cabc.Iterable[bytes]\n  - def __call__(self, environ: WSGIEnvironment, start_response: StartResponse) -> cabc.Iterable[bytes]",
+        "score": 0.785,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "4a95b9de-3bcf-4f71-8a48-6af07de144e6",
+        "file_path": "src/flask/json/provider.py",
+        "symbol_name": "response",
+        "symbol_type": "METHOD",
+        "start_line": 89,
+        "end_line": 105,
+        "content": "# File: src/flask/json/provider.py (Lines 89-105)\n# Class: JSONProvider | Symbol: JSONProvider.response\n# Imports: __future__, dataclasses, decimal, json, typing, uuid, weakref, datetime\n\n    def response(self, *args: t.Any, **kwargs: t.Any) -> Response:\n        \"\"\"Serialize the given arguments as JSON, and return a\n        :class:`~flask.Response` object with the ``application/json``\n        mimetype.\n\n        The :func:`~flask.json.jsonify` function calls this method for\n        the current application.\n\n        Either positional or keyword arguments can be given, not both.\n        If no arguments are given, ``None`` is serialized.\n\n        :param args: A single value to serialize, or multiple values to\n            treat as a list to serialize.\n        :param kwargs: Treat as a dict to serialize.\n        \"\"\"\n        obj = self._prepare_response_obj(args, kwargs)\n        return self._app.response_class(self.dumps(obj), mimetype=\"application/json\")",
+        "score": 0.6083,
+        "source": "hybrid"
+      }
+    ],
+    "retrieval_evidence": {
+      "candidate_count": 4,
+      "selected_count": 2,
+      "discarded_count": 2,
+      "bm25_scores": [
+        7.6545,
+        7.175,
+        7.1159,
+        6.8886
+      ],
+      "vector_scores": [],
+      "rrf_scores": [
+        0.016393,
+        0.016129,
+        0.015873,
+        0.014925
+      ],
+      "reranker_scores": [
+        0.785,
+        0.6083,
+        0.6077,
+        0.6071
+      ],
+      "context_tokens": 2219,
+      "evidence_threshold_met": true,
+      "threshold_reason": "sufficient_evidence"
+    },
+    "answer": "> [!NOTE]\n> **Offline Baseline Mode (`mock-llm`)**: This response is deterministically synthesized from retrieved codebase evidence. To enable live neural multi-turn reasoning, configure `GEMINI_API_KEY` or `OPENAI_API_KEY` in `.env`.\n\n### Technical Analysis: Where is the Flask application class implemented?\n\nBased on verified repository evidence, the implementation is structured as follows:\n\n1. **`Flask` (CLASS)** in [src/flask/app.py:L110-L1628]:\n   - **Documentation**: The flask object implements a WSGI application and acts as the central object.  It is passed the name of the module or package of the\n   - **Key Operations**: Exposes `__init__()`, `get_send_file_max_age()`, `send_static_file()`, `open_resource()`\n\n2. **`response` (METHOD)** in [src/flask/json/provider.py:L89-L105]:\n   - **Documentation**: Serialize the given arguments as JSON, and return a mimetype.\n   - **Key Operations**: Exposes `response()`\n\n### Key Takeaways\n- Core execution logic is anchored by [src/flask/app.py:L110-L1628], resolving runtime dispatch and state tracking.\n- Supporting context and lifecycle management are coordinated via [src/flask/json/provider.py:L89-L105].\n- All referenced line ranges have been verified against active AST declarations."
+  },
+  {
+    "query": "What happens when Flask pushes a request context?",
+    "intent": "GENERAL_QA",
+    "grounding_status": "VERIFIED",
+    "provider": "mock",
+    "is_mock": true,
+    "citations": [
+      {
+        "raw_citation": "[src/flask/helpers.py:L63-L148]",
+        "file_path": "src/flask/helpers.py",
+        "start_line": 63,
+        "end_line": 148,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "cfa25cd4-b3e0-4a82-9d2b-303aff93e9a6",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/app.py:L1504-L1518]",
+        "file_path": "src/flask/app.py",
+        "start_line": 1504,
+        "end_line": 1518,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "54486c85-baee-40eb-a7ee-f23bd4c6a34d",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/ctx.py:L209-L232]",
+        "file_path": "src/flask/ctx.py",
+        "start_line": 209,
+        "end_line": 232,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "ae0b7ce8-f5b1-4235-9c68-9905204739f2",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/app.py:L1024-L1054]",
+        "file_path": "src/flask/app.py",
+        "start_line": 1024,
+        "end_line": 1054,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": false,
+        "source_chunk_id": "a9efc4a5-1385-4347-af1b-1edaf7e4c7f0",
+        "confidence": 0.8,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/helpers.py:L63-L148]",
+        "file_path": "src/flask/helpers.py",
+        "start_line": 63,
+        "end_line": 148,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "cfa25cd4-b3e0-4a82-9d2b-303aff93e9a6",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/app.py:L1504-L1518]",
+        "file_path": "src/flask/app.py",
+        "start_line": 1504,
+        "end_line": 1518,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "54486c85-baee-40eb-a7ee-f23bd4c6a34d",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      }
+    ],
+    "retrieved_chunks": [
+      {
+        "chunk_id": "cfa25cd4-b3e0-4a82-9d2b-303aff93e9a6",
+        "file_path": "src/flask/helpers.py",
+        "symbol_name": "stream_with_context",
+        "symbol_type": "FUNCTION",
+        "start_line": 63,
+        "end_line": 148,
+        "content": "# File: src/flask/helpers.py (Lines 63-148)\n# Scope: Global | Symbol: stream_with_context\n# Imports: __future__, importlib.util, os, sys, typing, datetime, functools, functools\n\ndef stream_with_context(\n    generator_or_function: t.Iterator[t.AnyStr] | t.Callable[..., t.Iterator[t.AnyStr]],\n) -> t.Iterator[t.AnyStr] | t.Callable[[t.Iterator[t.AnyStr]], t.Iterator[t.AnyStr]]:\n    \"\"\"Wrap a response generator function so that it runs inside the current\n    request context. This keeps :data:`.request`, :data:`.session`, and :data:`.g`\n    available, even though at the point the generator runs the request context\n    will typically have ended.\n\n    .. warning::\n\n        Due to the following caveat, it is often safer to pass the data you\n        need as arguments to the generator, rather than relying on the context\n        objects.\n\n    More headers cannot be sent after the body has begun. Therefore, you must\n    make sure all headers are set before starting the response. In particular,\n    if the generator will access ``session``, be sure to do so in the view as\n    well so that the ``Vary: cookie`` header will be set. Do not modify the\n    session in the generator, as the ``Set-Cookie`` header will already be sent.\n\n    Use it as a decorator on a generator function:\n\n    .. code-block:: python\n\n        from flask import stream_with_context, request, Response\n\n        @app.get(\"/stream\")\n        def streamed_response():\n            @stream_with_context\n            def generate():\n                yield \"Hello \"\n                yield request.args[\"name\"]\n                yield \"!\"\n\n            return Response(generate())\n\n    Or use it as a wrapper around a created generator:\n\n    .. code-block:: python\n\n        from flask import stream_with_context, request, Response\n\n        @app.get(\"/stream\")\n        def streamed_response():\n            def generate():\n                yield \"Hello \"\n                yield request.args[\"name\"]\n                yield \"!\"\n\n            return Response(stream_with_context(generate()))\n\n    .. versionadded:: 0.9\n    \"\"\"\n    try:\n        gen = iter(generator_or_function)  # type: ignore[arg-type]\n    except TypeError:\n\n        def decorator(*args: t.Any, **kwargs: t.Any) -> t.Any:\n            gen = generator_or_function(*args, **kwargs)  # type: ignore[operator]\n            return stream_with_context(gen)\n\n        return update_wrapper(decorator, generator_or_function)  # type: ignore[arg-type]\n\n    def generator() -> t.Iterator[t.AnyStr]:\n        if (ctx := _cv_app.get(None)) is None:\n            raise RuntimeError(\n                \"'stream_with_context' can only be used when a request\"\n                \" context is active, such as in a view function.\"\n            )\n\n        with ctx:\n            yield None  # type: ignore[misc]\n\n            try:\n                yield from gen\n            finally:\n                # Clean up in case the user wrapped a WSGI iterator.\n                if hasattr(gen, \"close\"):\n                    gen.close()\n\n    # Execute the generator to the sentinel value. This captures the current\n    # context and pushes it to preserve it. Further iteration will yield from\n    # the original iterator.\n    wrapped_g = generator()\n    next(wrapped_g)\n    return wrapped_g",
+        "score": 0.72,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "54486c85-baee-40eb-a7ee-f23bd4c6a34d",
+        "file_path": "src/flask/app.py",
+        "symbol_name": "request_context",
+        "symbol_type": "METHOD",
+        "start_line": 1504,
+        "end_line": 1518,
+        "content": "# File: src/flask/app.py (Lines 1504-1518)\n# Class: Flask | Symbol: Flask.request_context\n# Imports: __future__, collections.abc, inspect, os, sys, typing, weakref, datetime\n\n    def request_context(self, environ: WSGIEnvironment) -> AppContext:\n        \"\"\"Create an :class:`.AppContext` with request information representing\n        the given WSGI environment. A context is automatically pushed when\n        handling each request. When the context is pushed, :data:`.request`,\n        :data:`.session`, :data:`g`, and :data:`.current_app` become available.\n\n        This method should not be used in your own code. Creating a valid WSGI\n        environ is not trivial. Use :meth:`test_request_context` to correctly\n        create a WSGI environ and request context instead.\n\n        See :doc:`/appcontext`.\n\n        :param environ: A WSGI environment.\n        \"\"\"\n        return AppContext.from_environ(self, environ)",
+        "score": 0.7155,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "ae0b7ce8-f5b1-4235-9c68-9905204739f2",
+        "file_path": "src/flask/ctx.py",
+        "symbol_name": "has_request_context",
+        "symbol_type": "FUNCTION",
+        "start_line": 209,
+        "end_line": 232,
+        "content": "# File: src/flask/ctx.py (Lines 209-232)\n# Scope: Global | Symbol: has_request_context\n# Imports: __future__, contextvars, typing, functools, types, werkzeug.exceptions, werkzeug.routing, \n\ndef has_request_context() -> bool:\n    \"\"\"Test if an app context is active and if it has request information.\n\n    .. code-block:: python\n\n        from flask import has_request_context, request\n\n        if has_request_context():\n            remote_addr = request.remote_addr\n\n    If a request context is active, the :data:`.request` and :data:`.session`\n    context proxies will available and ``True``, otherwise ``False``. You can\n    use that to test the data you use, rather than using this function.\n\n    .. code-block:: python\n\n        from flask import request\n\n        if request:\n            remote_addr = request.remote_addr\n\n    .. versionadded:: 0.7\n    \"\"\"\n    return (ctx := _cv_app.get(None)) is not None and ctx.has_request",
+        "score": 0.7154,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "a9efc4a5-1385-4347-af1b-1edaf7e4c7f0",
+        "file_path": "src/flask/app.py",
+        "symbol_name": "Flask.finalize_request",
+        "symbol_type": null,
+        "start_line": 1024,
+        "end_line": 1054,
+        "content": "# File: src/flask/app.py (Lines 1024-1054)\n# Class: Flask | Symbol: Flask.finalize_request\n# Imports: __future__, collections.abc, inspect, os, sys, typing, weakref, datetime\n\n    def finalize_request(\n        self,\n        ctx: AppContext,\n        rv: ft.ResponseReturnValue | HTTPException,\n        from_error_handler: bool = False,\n    ) -> Response:\n        \"\"\"Given the return value from a view function this finalizes\n        the request by converting it into a response and invoking the\n        postprocessing functions.  This is invoked for both normal\n        request dispatching as well as error handlers.\n\n        Because this means that it might be called as a result of a\n        failure a special safe mode is available which can be enabled\n        with the `from_error_handler` flag.  If enabled, failures in\n        response processing will be logged and otherwise ignored.\n\n        :internal:\n        \"\"\"\n        response = self.make_response(rv)\n        try:\n            response = self.process_response(ctx, response)\n            request_finished.send(\n                self, _async_wrapper=self.ensure_sync, response=response\n            )\n        except Exception:\n            if not from_error_handler:\n                raise\n            self.logger.exception(\n                \"Request finalizing failed with an error while handling an error\"\n            )\n        return response",
+        "score": 0.7153,
+        "source": "hybrid"
+      }
+    ],
+    "retrieval_evidence": {
+      "candidate_count": 4,
+      "selected_count": 4,
+      "discarded_count": 0,
+      "bm25_scores": [
+        15.8668,
+        12.4608,
+        12.3944
+      ],
+      "vector_scores": [
+        0.0926
+      ],
+      "rrf_scores": [
+        0.016393,
+        0.015152,
+        0.014925,
+        0.014706
+      ],
+      "reranker_scores": [
+        0.72,
+        0.7155,
+        0.7154,
+        0.7153
+      ],
+      "context_tokens": 1627,
+      "evidence_threshold_met": true,
+      "threshold_reason": "sufficient_evidence"
+    },
+    "answer": "> [!NOTE]\n> **Offline Baseline Mode (`mock-llm`)**: This response is deterministically synthesized from retrieved codebase evidence. To enable live neural multi-turn reasoning, configure `GEMINI_API_KEY` or `OPENAI_API_KEY` in `.env`.\n\n### Technical Analysis: What happens when Flask pushes a request context?\n\nBased on verified repository evidence, the implementation is structured as follows:\n\n1. **`stream_with_context` (FUNCTION)** in [src/flask/helpers.py:L63-L148]:\n   - **Documentation**: Wrap a response generator function so that it runs inside the current request context. This keeps :data:`.request`, :data:`.session`, and :data:`.g`\n   - **Key Operations**: Exposes `stream_with_context()`, `streamed_response()`, `generate()`, `streamed_response()`\n\n2. **`request_context` (METHOD)** in [src/flask/app.py:L1504-L1518]:\n   - **Documentation**: Create an :class:`.AppContext` with request information representing the given WSGI environment. A context is automatically pushed when\n   - **Key Operations**: Exposes `request_context()`\n\n3. **`has_request_context` (FUNCTION)** in [src/flask/ctx.py:L209-L232]:\n   - **Documentation**: Test if an app context is active and if it has request information. .. code-block:: python\n   - **Key Operations**: Exposes `has_request_context()`\n\n4. **`Flask.finalize_request` ()** in [src/flask/app.py:L1024-L1054]:\n   - **Documentation**: Given the return value from a view function this finalizes the request by converting it into a response and invoking the\n   - **Key Operations**: Exposes `finalize_request()`\n\n### Key Takeaways\n- Core execution logic is anchored by [src/flask/helpers.py:L63-L148], resolving runtime dispatch and state tracking.\n- Supporting context and lifecycle management are coordinated via [src/flask/app.py:L1504-L1518].\n- All referenced line ranges have been verified against active AST declarations."
+  },
+  {
+    "query": "How are request and application contexts different?",
+    "intent": "GENERAL_QA",
+    "grounding_status": "VERIFIED",
+    "provider": "mock",
+    "is_mock": true,
+    "citations": [
+      {
+        "raw_citation": "[src/flask/sansio/scaffold.py:L516-L547]",
+        "file_path": "src/flask/sansio/scaffold.py",
+        "start_line": 516,
+        "end_line": 547,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "49960edc-0a93-483b-af05-3e1d01167329",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/ctx.py:L371-L379]",
+        "file_path": "src/flask/ctx.py",
+        "start_line": 371,
+        "end_line": 379,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "bdc7d7f2-655b-4baf-b72d-013793601de7",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/app.py:L1569-L1619]",
+        "file_path": "src/flask/app.py",
+        "start_line": 1569,
+        "end_line": 1619,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "8c582c64-7e99-4bcc-908a-a8b7425b96f1",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[docs/config.rst:L1-L150]",
+        "file_path": "docs/config.rst",
+        "start_line": 1,
+        "end_line": 150,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "499a3bb7-4184-4c2d-8592-a8c55bb161f6",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/sansio/scaffold.py:L516-L547]",
+        "file_path": "src/flask/sansio/scaffold.py",
+        "start_line": 516,
+        "end_line": 547,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "49960edc-0a93-483b-af05-3e1d01167329",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/ctx.py:L371-L379]",
+        "file_path": "src/flask/ctx.py",
+        "start_line": 371,
+        "end_line": 379,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "bdc7d7f2-655b-4baf-b72d-013793601de7",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      }
+    ],
+    "retrieved_chunks": [
+      {
+        "chunk_id": "49960edc-0a93-483b-af05-3e1d01167329",
+        "file_path": "src/flask/sansio/scaffold.py",
+        "symbol_name": "teardown_request",
+        "symbol_type": "METHOD",
+        "start_line": 516,
+        "end_line": 547,
+        "content": "# File: src/flask/sansio/scaffold.py (Lines 516-547)\n# Class: Scaffold | Symbol: Scaffold.teardown_request\n# Imports: __future__, importlib.util, os, pathlib, sys, typing, collections, functools\n\n    def teardown_request(self, f: T_teardown) -> T_teardown:\n        \"\"\"Register a function to be called when the request context is\n        popped. Typically, this happens at the end of each request, but\n        contexts may be pushed manually during testing.\n\n        .. code-block:: python\n\n            with app.test_request_context():\n                ...\n\n        When the ``with`` block exits (or ``ctx.pop()`` is called), the\n        teardown functions are called just before the request context is\n        made inactive.\n\n        When a teardown function was called because of an unhandled\n        exception it will be passed an error object. If an\n        :meth:`errorhandler` is registered, it will handle the exception\n        and the teardown will not receive it.\n\n        Teardown functions must avoid raising exceptions. If they\n        execute code that might fail they must surround that code with a\n        ``try``/``except`` block and log any errors.\n\n        The return values of teardown functions are ignored.\n\n        This is available on both app and blueprint objects. When used on an app, this\n        executes after every request. When used on a blueprint, this executes after\n        every request that the blueprint handles. To register with a blueprint and\n        execute after every request, use :meth:`.Blueprint.teardown_app_request`.\n        \"\"\"\n        self.teardown_request_funcs.setdefault(None, []).append(f)\n        return f",
+        "score": 0.395,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "bdc7d7f2-655b-4baf-b72d-013793601de7",
+        "file_path": "src/flask/ctx.py",
+        "symbol_name": "request",
+        "symbol_type": "METHOD",
+        "start_line": 371,
+        "end_line": 379,
+        "content": "# File: src/flask/ctx.py (Lines 371-379)\n# Class: AppContext | Symbol: AppContext.request\n# Imports: __future__, contextvars, typing, functools, types, werkzeug.exceptions, werkzeug.routing, \n\n    def request(self) -> Request:\n        \"\"\"The request object associated with this context. Accessed through\n        :data:`.request`. Only available in request contexts, otherwise raises\n        :exc:`RuntimeError`.\n        \"\"\"\n        if self._request is None:\n            raise RuntimeError(\"There is no request in this context.\")\n\n        return self._request",
+        "score": 0.3913,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "8c582c64-7e99-4bcc-908a-a8b7425b96f1",
+        "file_path": "src/flask/app.py",
+        "symbol_name": "wsgi_app",
+        "symbol_type": "METHOD",
+        "start_line": 1569,
+        "end_line": 1619,
+        "content": "# File: src/flask/app.py (Lines 1569-1619)\n# Class: Flask | Symbol: Flask.wsgi_app\n# Imports: __future__, collections.abc, inspect, os, sys, typing, weakref, datetime\n\n    def wsgi_app(\n        self, environ: WSGIEnvironment, start_response: StartResponse\n    ) -> cabc.Iterable[bytes]:\n        \"\"\"The actual WSGI application. This is not implemented in\n        :meth:`__call__` so that middlewares can be applied without\n        losing a reference to the app object. Instead of doing this::\n\n            app = MyMiddleware(app)\n\n        It's a better idea to do this instead::\n\n            app.wsgi_app = MyMiddleware(app.wsgi_app)\n\n        Then you still have the original application object around and\n        can continue to call methods on it.\n\n        .. versionchanged:: 0.7\n            Teardown events for the request and app contexts are called\n            even if an unhandled error occurs. Other events may not be\n            called depending on when an error occurs during dispatch.\n\n        :param environ: A WSGI environment.\n        :param start_response: A callable accepting a status code,\n            a list of headers, and an optional exception context to\n            start the response.\n        \"\"\"\n        ctx = self.request_context(environ)\n        error: BaseException | None = None\n        try:\n            try:\n                ctx.push()\n                response = self.full_dispatch_request(ctx)\n            except Exception as e:\n                error = e\n                response = self.handle_exception(ctx, e)\n            except:\n                error = sys.exc_info()[1]\n                raise\n            return response(environ, start_response)\n        finally:\n            if \"werkzeug.debug.preserve_context\" in environ:\n                environ[\"werkzeug.debug.preserve_context\"](ctx)\n\n            if (\n                error is not None\n                and self.should_ignore_error is not None\n                and self.should_ignore_error(error)\n            ):\n                error = None\n\n            ctx.pop(error)",
+        "score": 0.3903,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "499a3bb7-4184-4c2d-8592-a8c55bb161f6",
+        "file_path": "docs/config.rst",
+        "symbol_name": null,
+        "symbol_type": null,
+        "start_line": 1,
+        "end_line": 150,
+        "content": "Configuration Handling\n======================\n\nApplications need some kind of configuration.  There are different settings\nyou might want to change depending on the application environment like\ntoggling the debug mode, setting the secret key, and other such\nenvironment-specific things.\n\nThe way Flask is designed usually requires the configuration to be\navailable when the application starts up.  You can hard code the\nconfiguration in the code, which for many small applications is not\nactually that bad, but there are better ways.\n\nIndependent of how you load your config, there is a config object\navailable which holds the loaded configuration values:\nThe :attr:`~flask.Flask.config` attribute of the :class:`~flask.Flask`\nobject.  This is the place where Flask itself puts certain configuration\nvalues and also where extensions can put their configuration values.  But\nthis is also where you can have your own configuration.\n\n\nConfiguration Basics\n--------------------\n\nThe :attr:`~flask.Flask.config` is actually a subclass of a dictionary and\ncan be modified just like any dictionary::\n\n    app = Flask(__name__)\n    app.config['TESTING'] = True\n\nCertain configuration values are also forwarded to the\n:attr:`~flask.Flask` object so you can read and write them from there::\n\n    app.testing = True\n\nTo update multiple keys at once you can use the :meth:`dict.update`\nmethod::\n\n    app.config.update(\n        TESTING=True,\n        SECRET_KEY='192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf'\n    )\n\n\nDebug Mode\n----------\n\nThe :data:`DEBUG` config value is special because it may behave inconsistently if\nchanged after the app has begun setting up. In order to set debug mode reliably, use the\n``--debug`` option on the ``flask`` or ``flask run`` command. ``flask run`` will use the\ninteractive debugger and reloader by default in debug mode.\n\n.. code-block:: text\n\n    $ flask --app hello run --debug\n\nUsing the option is recommended. While it is possible to set :data:`DEBUG` in your\nconfig or code, this is strongly discouraged. It can't be read early by the\n``flask run`` command, and some systems or extensions may have already configured\nthemselves based on a previous value.\n\n\nBuiltin Configuration Values\n----------------------------\n\nThe following configuration values are used internally by Flask:\n\n.. py:data:: DEBUG\n\n    Whether debug mode is enabled. When using ``flask run`` to start the development\n    server, an interactive debugger will be shown for unhandled exceptions, and the\n    server will be reloaded when code changes. The :attr:`~flask.Flask.debug` attribute\n    maps to this config key. This is set with the ``FLASK_DEBUG`` environment variable.\n    It may not behave as expected if set in code.\n\n    **Do not enable debug mode when deploying in production.**\n\n    Default: ``False``\n\n.. py:data:: TESTING\n\n    Enable testing mode. Exceptions are propagated rather than handled by\n    the app's error handlers. Extensions may also change their behavior to\n    facilitate easier testing. You should enable this in your own tests.\n\n    Default: ``False``\n\n.. py:data:: PROPAGATE_EXCEPTIONS\n\n    Exceptions are re-raised rather than being handled by the app's error\n    handlers. If not set, this is implicitly true if ``TESTING`` or ``DEBUG``\n    is enabled.\n\n    Default: ``None``\n\n.. py:data:: TRAP_HTTP_EXCEPTIONS\n\n    If there is no handler for an ``HTTPException``-type exception, re-raise it\n    to be handled by the interactive debugger instead of returning it as a\n    simple error response.\n\n    Default: ``False``\n\n.. py:data:: TRAP_BAD_REQUEST_ERRORS\n\n    Trying to access a key that doesn't exist from request dicts like ``args``\n    and ``form`` will return a 400 Bad Request error page. Enable this to treat\n    the error as an unhandled exception instead so that you get the interactive\n    debugger. This is a more specific version of ``TRAP_HTTP_EXCEPTIONS``. If\n    unset, it is enabled in debug mode.\n\n    Default: ``None``\n\n.. py:data:: SECRET_KEY\n\n    A secret key that will be used for securely signing the session cookie\n    and can be used for any other security related needs by extensions or your\n    application. It should be a long random ``bytes`` or ``str``. For\n    example, copy the output of this to your config::\n\n        $ python -c 'import secrets; print(secrets.token_hex())'\n        '192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf'\n\n    **Do not reveal the secret key when posting questions or committing code.**\n\n    Default: ``None``\n\n.. py:data:: SECRET_KEY_FALLBACKS\n\n    A list of old secret keys that can still be used for unsigning. This allows\n    a project to implement key rotation without invalidating active sessions or\n    other recently-signed secrets.\n\n    Keys should be removed after an appropriate period of time, as checking each\n    additional key adds some overhead.\n\n    Order should not matter, but the default implementation will test the last\n    key in the list first, so it might make sense to order oldest to newest.\n\n    Flask's built-in secure cookie session supports this. Extensions that use\n    :data:`SECRET_KEY` may not support this yet.\n\n    Default: ``None``\n\n    .. versionadded:: 3.1\n\n.. py:data:: SESSION_COOKIE_NAME\n\n    The name of the session cookie. Can be changed in case you already have a\n    cookie with the same name.",
+        "score": 0.3017,
+        "source": "hybrid"
+      }
+    ],
+    "retrieval_evidence": {
+      "candidate_count": 4,
+      "selected_count": 4,
+      "discarded_count": 0,
+      "bm25_scores": [
+        8.1988,
+        10.6143,
+        7.1494
+      ],
+      "vector_scores": [
+        0.0889,
+        0.1282
+      ],
+      "rrf_scores": [
+        0.029762,
+        0.016129,
+        0.014286,
+        0.016393
+      ],
+      "reranker_scores": [
+        0.395,
+        0.3913,
+        0.3903,
+        0.3017
+      ],
+      "context_tokens": 2407,
+      "evidence_threshold_met": true,
+      "threshold_reason": "sufficient_evidence"
+    },
+    "answer": "> [!NOTE]\n> **Offline Baseline Mode (`mock-llm`)**: This response is deterministically synthesized from retrieved codebase evidence. To enable live neural multi-turn reasoning, configure `GEMINI_API_KEY` or `OPENAI_API_KEY` in `.env`.\n\n### Technical Analysis: How are request and application contexts different?\n\nBased on verified repository evidence, the implementation is structured as follows:\n\n1. **`teardown_request` (METHOD)** in [src/flask/sansio/scaffold.py:L516-L547]:\n   - **Documentation**: Register a function to be called when the request context is popped. Typically, this happens at the end of each request, but\n   - **Key Operations**: Exposes `teardown_request()`\n\n2. **`request` (METHOD)** in [src/flask/ctx.py:L371-L379]:\n   - **Documentation**: The request object associated with this context. Accessed through\n   - **Key Operations**: Exposes `request()`\n\n3. **`wsgi_app` (METHOD)** in [src/flask/app.py:L1569-L1619]:\n   - **Documentation**: The actual WSGI application. This is not implemented in losing a reference to the app object. Instead of doing this::\n   - **Key Operations**: Exposes `wsgi_app()`\n\n4. **`docs/config.rst`** in [docs/config.rst:L1-L150]:\n   - **Topic**: Configuration Handling\n\n### Key Takeaways\n- Core execution logic is anchored by [src/flask/sansio/scaffold.py:L516-L547], resolving runtime dispatch and state tracking.\n- Supporting context and lifecycle management are coordinated via [src/flask/ctx.py:L371-L379].\n- All referenced line ranges have been verified against active AST declarations."
+  },
+  {
+    "query": "How does Flask route a request to a view function?",
+    "intent": "FACTUAL_CODE",
+    "grounding_status": "VERIFIED",
+    "provider": "mock",
+    "is_mock": true,
+    "citations": [
+      {
+        "raw_citation": "[src/flask/views.py:L86-L135]",
+        "file_path": "src/flask/views.py",
+        "start_line": 86,
+        "end_line": 135,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "4beea3d9-377e-482a-a89b-a50aeb0973f5",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/ctx.py:L118-L148]",
+        "file_path": "src/flask/ctx.py",
+        "start_line": 118,
+        "end_line": 148,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "4a46c966-e126-4130-b21e-07c4658ab02a",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/ctx.py:L154-L206]",
+        "file_path": "src/flask/ctx.py",
+        "start_line": 154,
+        "end_line": 206,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "24388276-5111-4bca-9c64-7d865cac114d",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/views.py:L86-L135]",
+        "file_path": "src/flask/views.py",
+        "start_line": 86,
+        "end_line": 135,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "4beea3d9-377e-482a-a89b-a50aeb0973f5",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      },
+      {
+        "raw_citation": "[src/flask/ctx.py:L118-L148]",
+        "file_path": "src/flask/ctx.py",
+        "start_line": 118,
+        "end_line": 148,
+        "file_exists": true,
+        "lines_in_bounds": true,
+        "overlaps_context": true,
+        "symbol_matches": true,
+        "source_chunk_id": "4a46c966-e126-4130-b21e-07c4658ab02a",
+        "confidence": 1.0,
+        "validation_reason": "fully_verified_and_grounded",
+        "is_valid": true
+      }
+    ],
+    "retrieved_chunks": [
+      {
+        "chunk_id": "4beea3d9-377e-482a-a89b-a50aeb0973f5",
+        "file_path": "src/flask/views.py",
+        "symbol_name": "as_view",
+        "symbol_type": "METHOD",
+        "start_line": 86,
+        "end_line": 135,
+        "content": "# File: src/flask/views.py (Lines 86-135)\n# Class: View | Symbol: View.as_view\n# Imports: __future__, typing, , globals, globals\n\n    def as_view(\n        cls, name: str, *class_args: t.Any, **class_kwargs: t.Any\n    ) -> ft.RouteCallable:\n        \"\"\"Convert the class into a view function that can be registered\n        for a route.\n\n        By default, the generated view will create a new instance of the\n        view class for every request and call its\n        :meth:`dispatch_request` method. If the view class sets\n        :attr:`init_every_request` to ``False``, the same instance will\n        be used for every request.\n\n        Except for ``name``, all other arguments passed to this method\n        are forwarded to the view class ``__init__`` method.\n\n        .. versionchanged:: 2.2\n            Added the ``init_every_request`` class attribute.\n        \"\"\"\n        if cls.init_every_request:\n\n            def view(**kwargs: t.Any) -> ft.ResponseReturnValue:\n                self = view.view_class(  # type: ignore[attr-defined]\n                    *class_args, **class_kwargs\n                )\n                return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]\n\n        else:\n            self = cls(*class_args, **class_kwargs)  # pyright: ignore\n\n            def view(**kwargs: t.Any) -> ft.ResponseReturnValue:\n                return current_app.ensure_sync(self.dispatch_request)(**kwargs)  # type: ignore[no-any-return]\n\n        if cls.decorators:\n            view.__name__ = name\n            view.__module__ = cls.__module__\n            for decorator in cls.decorators:\n                view = decorator(view)\n\n        # We attach the view class to the view function for two reasons:\n        # first of all it allows us to easily figure out what class-based\n        # view this thing came from, secondly it's also used for instantiating\n        # the view class so you can actually replace it with something else\n        # for testing purposes and debugging.\n        view.view_class = cls  # type: ignore\n        view.__name__ = name\n        view.__doc__ = cls.__doc__\n        view.__module__ = cls.__module__\n        view.methods = cls.methods  # type: ignore\n        view.provide_automatic_options = cls.provide_automatic_options  # type: ignore\n        return view",
+        "score": 0.677,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "4a46c966-e126-4130-b21e-07c4658ab02a",
+        "file_path": "src/flask/ctx.py",
+        "symbol_name": "after_this_request",
+        "symbol_type": "FUNCTION",
+        "start_line": 118,
+        "end_line": 148,
+        "content": "# File: src/flask/ctx.py (Lines 118-148)\n# Scope: Global | Symbol: after_this_request\n# Imports: __future__, contextvars, typing, functools, types, werkzeug.exceptions, werkzeug.routing, \n\ndef after_this_request(\n    f: ft.AfterRequestCallable[t.Any],\n) -> ft.AfterRequestCallable[t.Any]:\n    \"\"\"Decorate a function to run after the current request. The behavior is the\n    same as :meth:`.Flask.after_request`, except it only applies to the current\n    request, rather than every request. Therefore, it must be used within a\n    request context, rather than during setup.\n\n    .. code-block:: python\n\n        @app.route(\"/\")\n        def index():\n            @after_this_request\n            def add_header(response):\n                response.headers[\"X-Foo\"] = \"Parachute\"\n                return response\n\n            return \"Hello, World!\"\n\n    .. versionadded:: 0.9\n    \"\"\"\n    ctx = _cv_app.get(None)\n\n    if ctx is None or not ctx.has_request:\n        raise RuntimeError(\n            \"'after_this_request' can only be used when a request\"\n            \" context is active, such as in a view function.\"\n        )\n\n    ctx._after_request_functions.append(f)\n    return f",
+        "score": 0.6765,
+        "source": "hybrid"
+      },
+      {
+        "chunk_id": "24388276-5111-4bca-9c64-7d865cac114d",
+        "file_path": "src/flask/ctx.py",
+        "symbol_name": "copy_current_request_context",
+        "symbol_type": "FUNCTION",
+        "start_line": 154,
+        "end_line": 206,
+        "content": "# File: src/flask/ctx.py (Lines 154-206)\n# Scope: Global | Symbol: copy_current_request_context\n# Imports: __future__, contextvars, typing, functools, types, werkzeug.exceptions, werkzeug.routing, \n\ndef copy_current_request_context(f: F) -> F:\n    \"\"\"Decorate a function to run inside the current request context. This can\n    be used when starting a background task, otherwise it will not see the app\n    and request objects that were active in the parent.\n\n    .. warning::\n\n        Due to the following caveats, it is often safer (and simpler) to pass\n        the data you need when starting the task, rather than using this and\n        relying on the context objects.\n\n    In order to avoid execution switching partially though reading data, either\n    read the request body (access ``form``, ``json``, ``data``, etc) before\n    starting the task, or use a lock. This can be an issue when using threading,\n    but shouldn't be an issue when using greenlet/gevent or asyncio.\n\n    If the task will access ``session``, be sure to do so in the parent as well\n    so that the ``Vary: cookie`` header will be set. Modifying ``session`` in\n    the task should be avoided, as it may execute after the response cookie has\n    already been written.\n\n    .. code-block:: python\n\n        import gevent\n        from flask import copy_current_request_context\n\n        @app.route('/')\n        def index():\n            @copy_current_request_context\n            def do_some_work():\n                # do some work here, it can access flask.request or\n                # flask.session like you would otherwise in the view function.\n                ...\n            gevent.spawn(do_some_work)\n            return 'Regular response'\n\n    .. versionadded:: 0.10\n    \"\"\"\n    # Store the context that was active when the decorator was applied.\n    original = _cv_app.get(None)\n\n    if original is None:\n        raise RuntimeError(\n            \"'copy_current_request_context' can only be used when a\"\n            \" request context is active, such as in a view function.\"\n        )\n\n    def wrapper(*args: t.Any, **kwargs: t.Any) -> t.Any:\n        # Copy the context before pushing, so each worker acts independently.\n        with original.copy() as ctx:\n            return ctx.app.ensure_sync(f)(*args, **kwargs)\n\n    return update_wrapper(wrapper, f)  # type: ignore[return-value]",
+        "score": 0.6764,
+        "source": "hybrid"
+      }
+    ],
+    "retrieval_evidence": {
+      "candidate_count": 4,
+      "selected_count": 3,
+      "discarded_count": 1,
+      "bm25_scores": [
+        18.019,
+        16.6147,
+        15.8077,
+        19.446
+      ],
+      "vector_scores": [],
+      "rrf_scores": [
+        0.015873,
+        0.015152,
+        0.014925,
+        0.016393
+      ],
+      "reranker_scores": [
+        0.677,
+        0.6765,
+        0.6764,
+        0.5745
+      ],
+      "context_tokens": 1462,
+      "evidence_threshold_met": true,
+      "threshold_reason": "sufficient_evidence"
+    },
+    "answer": "> [!NOTE]\n> **Offline Baseline Mode (`mock-llm`)**: This response is deterministically synthesized from retrieved codebase evidence. To enable live neural multi-turn reasoning, configure `GEMINI_API_KEY` or `OPENAI_API_KEY` in `.env`.\n\n### Technical Analysis: How does Flask route a request to a view function?\n\nBased on verified repository evidence, the implementation is structured as follows:\n\n1. **`as_view` (METHOD)** in [src/flask/views.py:L86-L135]:\n   - **Documentation**: Convert the class into a view function that can be registered for a route.\n   - **Key Operations**: Exposes `as_view()`, `view()`, `view()`\n\n2. **`after_this_request` (FUNCTION)** in [src/flask/ctx.py:L118-L148]:\n   - **Documentation**: Decorate a function to run after the current request. The behavior is the same as :meth:`.Flask.after_request`, except it only applies to the current\n   - **Key Operations**: Exposes `after_this_request()`, `index()`, `add_header()`\n\n3. **`copy_current_request_context` (FUNCTION)** in [src/flask/ctx.py:L154-L206]:\n   - **Documentation**: Decorate a function to run inside the current request context. This can be used when starting a background task, otherwise it will not see the app\n   - **Key Operations**: Exposes `copy_current_request_context()`, `index()`, `do_some_work()`, `wrapper()`\n\n### Key Takeaways\n- Core execution logic is anchored by [src/flask/views.py:L86-L135], resolving runtime dispatch and state tracking.\n- Supporting context and lifecycle management are coordinated via [src/flask/ctx.py:L118-L148].\n- All referenced line ranges have been verified against active AST declarations."
+  }
+]

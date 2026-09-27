@@ -1,0 +1,58 @@
+declare module "lucide-react" {
+  import { FC, SVGProps } from "react";
+  export interface IconProps extends SVGProps<SVGSVGElement> {
+    size?: string | number;
+    color?: string;
+    strokeWidth?: string | number;
+  }
+  export const Terminal: FC<IconProps>;
+  export const GitPullRequest: FC<IconProps>;
+  export const ShieldAlert: FC<IconProps>;
+  export const Cpu: FC<IconProps>;
+  export const Network: FC<IconProps>;
+  export const Search: FC<IconProps>;
+  export const ArrowRight: FC<IconProps>;
+  export const ArrowUpRight: FC<IconProps>;
+  export const ArrowLeft: FC<IconProps>;
+  export const CheckCircle2: FC<IconProps>;
+  export const AlertCircle: FC<IconProps>;
+  export const Loader2: FC<IconProps>;
+  export const LayoutDashboard: FC<IconProps>;
+  export const GitBranch: FC<IconProps>;
+  export const FileCode: FC<IconProps>;
+  export const MessageSquare: FC<IconProps>;
+  export const ShieldCheck: FC<IconProps>;
+  export const BookOpen: FC<IconProps>;
+  export const BarChart3: FC<IconProps>;
+  export const Settings: FC<IconProps>;
+  export const Shield: FC<IconProps>;
+  export const LogOut: FC<IconProps>;
+  export const ChevronDown: FC<IconProps>;
+  export const Code2: FC<IconProps>;
+  export const Boxes: FC<IconProps>;
+  export const Clock: FC<IconProps>;
+  export const Plus: FC<IconProps>;
+  export const Trash2: FC<IconProps>;
+  export const ExternalLink: FC<IconProps>;
+  export const FolderGit2: FC<IconProps>;
+  export const Key: FC<IconProps>;
+  export const User: FC<IconProps>;
+  export const Server: FC<IconProps>;
+  export const Database: FC<IconProps>;
+  export const Layers: FC<IconProps>;
+  export const Lock: FC<IconProps>;
+  export const Share2: FC<IconProps>;
+  export const GitCompare: FC<IconProps>;
+  export const Zap: FC<IconProps>;
+  export const KeyRound: FC<IconProps>;
+  export const FileText: FC<IconProps>;
+  export const Sparkles: FC<IconProps>;
+  export const Activity: FC<IconProps>;
+  export const Gauge: FC<IconProps>;
+  export const Copy: FC<IconProps>;
+  export const Check: FC<IconProps>;
+  export const Filter: FC<IconProps>;
+  export const SlidersHorizontal: FC<IconProps>;
+  const icons: Record<string, FC<IconProps>>;
+  export default icons;
+}

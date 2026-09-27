@@ -1,0 +1,50 @@
+{
+  "BM25": {
+    "Recall@1": 0.7167,
+    "Recall@3": 0.8167,
+    "Recall@5": 0.8333,
+    "Recall@10": 0.8333,
+    "MRR": 0.7681,
+    "Precision@1": 0.7167,
+    "Precision@5": 0.4067,
+    "Precision@10": 0.265,
+    "NDCG@5": 0.7026,
+    "NDCG@10": 0.7595
+  },
+  "Dense": {
+    "Recall@1": 0.0,
+    "Recall@3": 0.0,
+    "Recall@5": 0.0,
+    "Recall@10": 0.0333,
+    "MRR": 0.004,
+    "Precision@1": 0.0,
+    "Precision@5": 0.0,
+    "Precision@10": 0.0033,
+    "NDCG@5": 0.0,
+    "NDCG@10": 0.0104
+  },
+  "Hybrid": {
+    "Recall@1": 0.4167,
+    "Recall@3": 0.7667,
+    "Recall@5": 0.8167,
+    "Recall@10": 0.8333,
+    "MRR": 0.5752,
+    "Precision@1": 0.4167,
+    "Precision@5": 0.2833,
+    "Precision@10": 0.2067,
+    "NDCG@5": 0.5013,
+    "NDCG@10": 0.5993
+  },
+  "Hybrid+Reranker": {
+    "Recall@1": 0.5333,
+    "Recall@3": 0.8,
+    "Recall@5": 0.8333,
+    "Recall@10": 0.8333,
+    "MRR": 0.6611,
+    "Precision@1": 0.5333,
+    "Precision@5": 0.32,
+    "Precision@10": 0.2183,
+    "NDCG@5": 0.5873,
+    "NDCG@10": 0.6643
+  }
+}
